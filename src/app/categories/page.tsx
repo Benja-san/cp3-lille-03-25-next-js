@@ -7,6 +7,9 @@ export default async function CategoriesPage() {
 
   return (
     <div className={styles.container}>
+      <Link href="/categories/add" className={styles.addButton}>
+        Add New Category ➕
+      </Link>
       <h1 className={styles.title}>Categories</h1>
       <div className={styles.grid}>
         {categories.map((category) => (
@@ -27,7 +30,10 @@ export default async function CategoriesPage() {
                 alignItems: "center",
               }}
             >
-              <img src={category.image_path} />
+              <img
+                src={category.image_path}
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
+              />
             </div>
           </Link>
         ))}
