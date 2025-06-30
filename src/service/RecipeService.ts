@@ -3,9 +3,14 @@ import { deleteRecipe } from "@/lib/deleteRecipe"
 import { updateRecipe } from "@/lib/updateRecipe"
 import { Recipe } from "@/models/Recipe"
 import { postRecipe } from "@/lib/postRecipe"
+import { getRecipes } from "@/lib/getRecipes"
 
 async function getOneRecipe(id: string): Promise<Recipe> {
   return await getRecipe(id)
+}
+
+async function getAllRecipes() {
+  return await getRecipes()
 }
 
 async function deleteOneRecipe(id: number): Promise<Response> {
@@ -41,4 +46,4 @@ async function createRecipe(formData: FormData) {
   return await postRecipe(recipe)
 }
 
-export { getOneRecipe, deleteOneRecipe, updateOneRecipe, createRecipe }
+export { getOneRecipe, deleteOneRecipe, updateOneRecipe, createRecipe, getAllRecipes }
