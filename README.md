@@ -37,34 +37,34 @@ Follow these steps to get the application up and running on your local machine:
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Your Mission, Should You Choose to Accept It...
+## Votre mission, si vous choisissez de l'accepter...
 
-Hey, I vibecoded my first app! But unfortunately, I'm facing some issues and I need a dev to help me...
+Hey, j'ai vibecodé ma première application ! Mais malheureusement, je rencontre quelques problèmes et j'ai besoin d'un dev pour m'aider...
 
-### First Step: The Add method has an issue!
+### Première étape : La méthode Add présente un problème !
 
-Find what's wrong and make it work. Test the add page in the app to see if everything is okay!
+Trouvez ce qui ne va pas et faites en sorte que cela fonctionne. Testez la page d'ajout dans l'application pour voir si tout va bien !
 
-### Second Step: The Edit and Delete API methods have not been implemented!
+### Deuxième étape : Les méthodes API Editer et Supprimer n'ont pas été implémentées !
 
-Implement them and test the app by editing and deleting some recipes.
+Implémentez-les et testez l'application en modifiant et en supprimant quelques recettes.
 
-### Third Step: The Get function is implemented but does not respect the app design pattern!
+### Troisième étape : La fonction Get est implémentée mais ne respecte pas le modèle de conception de l'application !
 
-Shift it accordingly to the good practices employed in the architecture.
+Modifiez-la en fonction des bonnes pratiques employées dans l'architecture.
 
-### Bonus Step: Categories!
+### Bonus Step : Catégories !
 
-Add a Link in the header toward "/categories". You'll see a route, but the pictures are not available yet for categories. Manage the app to add pictures for categories!
+Ajoutez un lien dans l'en-tête vers « /categories ». Vous verrez un itinéraire, mais les images ne sont pas encore disponibles pour les catégories. Gérer l'application pour ajouter des images pour les catégories !
 
-### Bonus Part 2: Category Recipes!
+### Bonus Partie 2 : Recettes pour les catégories !
 
-I'd like my route `/categories/[id]` to display a category and all its recipes. Create the methods in order to get there, respecting the pattern of the architecture.
+J'aimerais que ma route `/categories/[id]` affiche une catégorie et toutes ses recettes. Créez les méthodes pour y arriver, en respectant le modèle de l'architecture.
 
-### Bonus Last Part: Dashboard!
+### Bonus Dernière partie : Tableau de bord !
 
-Create a Dashboard to manage categories CRUD operations.
+Créer un tableau de bord pour gérer les opérations CRUD des catégories.
 
-## Good Luck, Have Fun!
+## Bonne chance, amusez-vous bien !
 
-This Checkpoint will help you practice and reinforce your understanding of Next.js and its features. Don't hesitate to reach out for help if you get stuck!
+Ce Checkpoint vous aidera à mettre en pratique et à renforcer votre compréhension de Next.js et de ses fonctionnalités. N'hésitez pas à demander de l'aide si vous êtes bloqué !
