@@ -9,7 +9,7 @@ Follow these steps to get the application up and running on your local machine:
 1.  **Create `.env` file**: Copy the `.env.sample` file to `.env`.
 
     ```bash
-    cp env.sample .env
+    cp env.example .env
     ```
 
 2.  **Install dependencies**: Install all the necessary project dependencies.
