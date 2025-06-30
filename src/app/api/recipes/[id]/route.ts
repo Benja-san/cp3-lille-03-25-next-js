@@ -74,7 +74,7 @@ export async function DELETE(
     await connection.execute("DELETE FROM recipes WHERE id = ?", [id]);
 
     return NextResponse.json({
-      message: "Recipe updated successfully",
+      message: "Recipe deleted successfully",
       success: true,
     });
   } catch (error) {

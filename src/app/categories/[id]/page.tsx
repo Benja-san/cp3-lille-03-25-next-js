@@ -1,28 +1,32 @@
-import styles from "@/app/page.module.css"
-import RecipeCard from "@/components/RecipeCard"
-import { Category } from "@/models/Category"
-import { Recipe } from "@/models/Recipe"
+import styles from "@/app/page.module.css";
+import RecipeCard from "@/components/RecipeCard";
+import { Category } from "@/models/Category";
+import { Recipe } from "@/models/Recipe";
+import { getCategoryWithRecipes } from "@/service/CategoryService";
 
 export default async function CategoryRecipesPage({
   params,
 }: {
-  params: { id: string }
+  params: { id: string };
 }) {
-  const { id } = await params
-  // Fetch category and recipes data based on the id and update the const declaration bellow
+  const { id } = await params;
+  const data = await getCategoryWithRecipes(id);
+  const recipes = Array.isArray(data) ? data : [];
+  const categoryTitle = recipes[0]?.category_title || "Category Title";
+
   const {
     category,
-    recipes,
+    recipes: finalRecipes,
   }: {
-    category: Category | { id: string; title: string }
-    recipes: Recipe[]
+    category: Category | { id: string; title: string };
+    recipes: Recipe[];
   } = {
-    category: { id: id, title: "Category Title" }, // Placeholder for category data
-    recipes: [], // Placeholder for recipes data
-  }
+    category: { id: id, title: `${categoryTitle} category` },
+    recipes: [],
+  };
 
   if (!id || !category || recipes.length === 0)
-    return <p>Nothing has been found there mate !</p>
+    return <p>Nothing has been found there mate !</p>;
 
   return (
     <div className={styles.container}>
@@ -33,5 +37,5 @@ export default async function CategoryRecipesPage({
         ))}
       </div>
     </div>
-  )
+  );
 }

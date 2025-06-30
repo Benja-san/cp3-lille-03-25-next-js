@@ -1,9 +1,9 @@
-import Link from "next/link"
-import styles from "@/app/page.module.css"
-import { getAllCategories } from "@/service/CategoryService"
+import Link from "next/link";
+import styles from "@/app/page.module.css";
+import { getAllCategories } from "@/service/CategoryService";
 
 export default async function CategoriesPage() {
-  const categories = await getAllCategories()
+  const categories = await getAllCategories();
 
   return (
     <div className={styles.container}>
@@ -17,12 +17,21 @@ export default async function CategoriesPage() {
           >
             <h2>{category.title}</h2>
             {/* Placeholder for image */}
-            <div style={{ width: '100%', height: '150px', backgroundColor: '#ccc', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <span>Category Image Placeholder</span>
+            <div
+              style={{
+                width: "100%",
+                height: "150px",
+                backgroundColor: "#ccc",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src={category.image_path} />
             </div>
           </Link>
         ))}
       </div>
     </div>
-  )
+  );
 }
