@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { Recipe } from "@/models/Recipe";
 
 async function getRecipes(): Promise<Recipe[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/recipes`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
   if (!res.ok) {
     throw new Error("Failed to fetch recipes");
   }
