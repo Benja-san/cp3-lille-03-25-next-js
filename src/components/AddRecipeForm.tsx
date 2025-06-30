@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import styles from "@/app/add/add.module.css"
-import { createRecipe } from "@/service/RecipeService"
-import { ICategory as Category } from "@/models/Category"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import styles from "@/app/add/add.module.css";
+import { createRecipe } from "@/service/RecipeService";
+import { ICategory as Category } from "@/models/Category";
 
 interface AddRecipeFormProps {
-  categories: Category[]
+  categories: Category[];
 }
 
 export default function AddRecipeForm({ categories }: AddRecipeFormProps) {
-  const [isPending, setIsPending] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    setIsPending(true)
-    setError(null)
+    setIsPending(true);
+    setError(null);
 
     try {
-      await createRecipe(formData)
-      router.push("/")
+      await createRecipe(formData);
+      router.push("/");
     } catch (e: unknown) {
       if (e instanceof Error) {
-        setError(e.message)
+        setError(e.message);
       } else {
-        setError("An unexpected error occurred.")
+        setError("An unexpected error occurred.");
       }
     } finally {
-      setIsPending(false)
+      setIsPending(false);
     }
-  }
+  };
 
   return (
     <form className={styles.form} action={handleSubmit}>
@@ -94,5 +94,5 @@ export default function AddRecipeForm({ categories }: AddRecipeFormProps) {
         {isPending ? "Adding Recipe..." : "Add Recipe"}
       </button>
     </form>
-  )
+  );
 }

@@ -1,32 +1,33 @@
-import Link from "next/link"
-import RecipeCard from "@/components/RecipeCard"
-import styles from "./page.module.css"
-import { Recipe } from "@/models/Recipe"
+import Link from "next/link";
+import RecipeCard from "@/components/RecipeCard";
+import styles from "./page.module.css";
+import { Recipe } from "@/models/Recipe";
 
 async function getRecipes(): Promise<Recipe[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`)
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
+  const res = await fetch(`${apiUrl}/recipes`);
   if (!res.ok) {
-    throw new Error("Failed to fetch recipes")
+    throw new Error("Failed to fetch recipes");
   }
-  return res.json()
+  return res.json();
 }
 
 export default async function Home() {
-  let recipes: Recipe[] = []
-  let error: string | null = null
+  let recipes: Recipe[] = [];
+  let error: string | null = null;
 
   try {
-    recipes = await getRecipes()
+    recipes = await getRecipes();
   } catch (e: unknown) {
     if (e instanceof Error) {
-      error = e.message
+      error = e.message;
     } else {
-      error = "An unknown error occurred"
+      error = "An unknown error occurred";
     }
   }
 
   if (error) {
-    return <main className={styles.main}>Error: {error}</main>
+    return <main className={styles.main}>Error: {error}</main>;
   }
 
   return (
@@ -47,5 +48,5 @@ export default async function Home() {
         )}
       </div>
     </main>
-  )
+  );
 }
