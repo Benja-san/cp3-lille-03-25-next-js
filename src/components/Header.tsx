@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import styles from './Header.module.css';
+import Link from "next/link";
+import styles from "./Header.module.css";
 
 export default function Header() {
   return (
@@ -7,6 +7,7 @@ export default function Header() {
       <Link href="/" className={styles.logo}>
         Recipe App
       </Link>
+      <Link href="/categories">Categories</Link>
     </header>
   );
 }
