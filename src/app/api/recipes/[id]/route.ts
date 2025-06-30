@@ -1,4 +1,4 @@
-import { doSomething, Recipe } from "@/lib/data";
+import { Recipe } from "@/lib/data";
 import { getConnection } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -38,11 +38,57 @@ export async function PUT(
   const connection = await getConnection();
   try {
     const { id } = await params;
+    const recipeId = parseInt(id);
+    const updatedRecipe = (await request.json()) as Recipe;
+    const { title, description, ingredients, picture, categoryId } =
+      updatedRecipe;
 
-    // TODO : Implement the logic to update the recipe
-    const provisoryResponse = doSomething(id) as string;
+    if (typeof recipeId !== "number" || isNaN(recipeId)) {
+      return NextResponse.json(
+        { error: "Informations invalides" },
+        { status: 400 }
+      );
+    }
 
-    return NextResponse.json({ message: provisoryResponse });
+    if (
+      typeof title !== "string" ||
+      typeof description !== "string" ||
+      typeof ingredients !== "string" ||
+      typeof picture !== "string" ||
+      typeof categoryId !== "number" ||
+      title.trim() === "" ||
+      description.trim() === "" ||
+      ingredients.trim() === "" ||
+      picture.trim() === "" ||
+      categoryId <= 0 ||
+      title.length > 255 ||
+      picture.length > 255
+    ) {
+      return NextResponse.json(
+        { error: "Les données ne sont pas valides" },
+        { status: 400 }
+      );
+    }
+
+    const [result] = await connection.execute(
+      "UPDATE recipes SET title = ?, description = ?, ingredients = ?, picture = ?, category_id = ? WHERE id = ?",
+      [
+        title.trim(),
+        description.trim(),
+        ingredients.trim(),
+        picture.trim(),
+        categoryId,
+        recipeId,
+      ]
+    );
+
+    if (!result) {
+      return NextResponse.json(
+        { error: "Recette non trouvée" },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json({ message: "Recette modifiée" });
   } catch (error) {
     console.error("Error updating recipe:", error);
     return NextResponse.json(
