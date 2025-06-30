@@ -1,33 +1,33 @@
-import { getRecipe } from "@/lib/getRecipe"
-import { deleteRecipe } from "@/lib/deleteRecipe"
-import { updateRecipe } from "@/lib/updateRecipe"
-import { Recipe } from "@/models/Recipe"
-import { postRecipe } from "@/lib/postRecipe"
+import { getRecipe } from "@/lib/getRecipe";
+import { deleteRecipe } from "@/lib/deleteRecipe";
+import { updateRecipe } from "@/lib/updateRecipe";
+import { Recipe } from "@/models/Recipe";
+import { postRecipe } from "@/lib/postRecipe";
 
 async function getOneRecipe(id: string): Promise<Recipe> {
-  return await getRecipe(id)
+  return await getRecipe(id);
 }
 
 async function deleteOneRecipe(id: number): Promise<Response> {
-  return await deleteRecipe(id)
+  return await deleteRecipe(id);
 }
 
 async function updateOneRecipe(
   id: string,
   recipe: Omit<Recipe, "id" | "categoryTitle">
 ): Promise<Response> {
-  return await updateRecipe(id, recipe)
+  return await updateRecipe(id, recipe);
 }
 
 async function createRecipe(formData: FormData) {
-  const title = formData.get("title") as string
-  const description = formData.get("description") as string
-  const ingredients = formData.get("ingredients") as string
-  const picture = formData.get("picture") as string
-  const categoryId = formData.get("category") as string
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const ingredients = formData.get("ingredients") as string;
+  const picture = formData.get("picture") as string;
+  const categoryId = formData.get("categoryId") as string;
 
   if (!title || !description || !ingredients || !categoryId) {
-    throw new Error("Missing required fields")
+    throw new Error("Missing required fields");
   }
 
   const recipe: Omit<Recipe, "id" | "categoryTitle"> = {
@@ -36,9 +36,9 @@ async function createRecipe(formData: FormData) {
     ingredients,
     picture,
     categoryId: parseInt(categoryId),
-  }
+  };
 
-  return await postRecipe(recipe)
+  return await postRecipe(recipe);
 }
 
-export { getOneRecipe, deleteOneRecipe, updateOneRecipe, createRecipe }
+export { getOneRecipe, deleteOneRecipe, updateOneRecipe, createRecipe };
