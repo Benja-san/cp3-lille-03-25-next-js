@@ -1,9 +1,9 @@
-import Link from "next/link"
-import styles from "./RecipeCard.module.css"
-import { Recipe } from "@/models/Recipe"
+import Link from "next/link";
+import styles from "./RecipeCard.module.css";
+import { Recipe } from "@/models/Recipe";
 
 interface RecipeCardProps {
-  recipe: Recipe
+  recipe: Recipe;
 }
 
 export default function RecipeCard({ recipe }: RecipeCardProps) {
@@ -24,8 +24,11 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           <Link href={`/${recipe.id}/edit`} className={styles.button}>
             Edit
           </Link>
+          <Link href={`/${recipe.id}/delete`} className={styles.button}>
+            Delete
+          </Link>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -33,6 +33,7 @@ export default async function Home() {
     <main className={styles.main}>
       <div className={styles.header}>
         <h1 className={styles.title}>My Recipes</h1>
+
         <Link href="/add" className={styles.addButton}>
           Add New Recipe ➕
         </Link>
