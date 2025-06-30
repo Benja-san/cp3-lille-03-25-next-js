@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getConnection } from "@/lib/db"
-import { doSomething, Recipe } from "@/lib/data"
+import {  Recipe } from "@/lib/data"
 
 export async function GET(
   request: NextRequest,
@@ -35,11 +35,38 @@ export async function PUT(
   const connection = await getConnection()
   try {
     const { id } = await params
+    const recipeId = parseInt(id, 10)
 
-    // TODO : Implement the logic to update the recipe
-    const provisoryResponse = doSomething(id) as string
+    if (isNaN(recipeId)) {
+      return NextResponse.json(
+        { message: "Invalid recipe ID" },
+        { status: 400 }
+      )
+    }
 
-    return NextResponse.json({ message: provisoryResponse })
+    const { title, description, ingredients, picture, categoryId } = await request.json()
+
+    if (!title || !description || !ingredients || !picture || !categoryId) {
+      return NextResponse.json(
+        { message: "Missing required fields" },
+        { status: 400 }
+      )
+    }
+
+    await connection.execute(
+      "UPDATE recipes SET title = ?, description = ?, ingredients = ?, picture = ?, category_id = ? WHERE id = ?",
+      [title, description, ingredients, picture, categoryId, recipeId]
+    )
+
+    return NextResponse.json({
+      message: "Recipe updated successfully",
+      id: recipeId,
+      title,
+      description,
+      ingredients,
+      picture,
+      categoryId
+    })
   } catch (error) {
     console.error("Error updating recipe:", error)
     return NextResponse.json(
@@ -58,11 +85,17 @@ export async function DELETE(
   const connection = await getConnection()
   try {
     const { id } = await params
+    const recipeId = parseInt(id, 10)
 
-    // TODO : Implement the logic to update the recipe
-    const provisoryResponse = doSomething(id) as string
+    if (isNaN(recipeId)) {
+      return NextResponse.json(
+        { message: "Invalid recipe ID" },
+        { status: 400 }
+      )
+    }
 
-    return NextResponse.json({ message: provisoryResponse })
+    await connection.execute("DELETE FROM recipes WHERE id = ?", [recipeId])
+    return NextResponse.json({ message: "Recipe deleted successfully" })
   } catch (error) {
     console.error("Error deleting recipe:", error)
     return NextResponse.json(

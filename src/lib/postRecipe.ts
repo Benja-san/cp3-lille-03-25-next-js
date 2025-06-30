@@ -4,7 +4,7 @@ export async function postRecipe(
   recipe: Omit<Recipe, "id" | "categoryTitle">
 ): Promise<Recipe> {
   const response = await fetch("/api/recipes", {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },

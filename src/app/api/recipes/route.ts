@@ -56,3 +56,30 @@ export async function POST(request: NextRequest) {
     connection.end()
   }
 }
+
+export async function DELETE(req: Request) {
+  const connection = await getConnection()
+  try {
+    const url = new URL(req.url)
+    const idParam = url.searchParams.get("id")
+    const recipeId = idParam !== null ? parseInt(idParam, 10) : NaN
+
+    if (isNaN(recipeId)) {
+      return NextResponse.json(
+        { message: "Invalid recipe ID" },
+        { status: 400 }
+      )
+    }
+
+    await connection.execute("DELETE FROM recipes WHERE id = ?", [recipeId])
+    return NextResponse.json({ message: "Recipe deleted successfully" })
+  } catch (error) {
+    console.error("Error deleting recipe:", error)
+    return NextResponse.json(
+      { message: "Error deleting recipe" },
+      { status: 500 }
+    )
+  } finally {
+    connection.end()
+  }
+}
