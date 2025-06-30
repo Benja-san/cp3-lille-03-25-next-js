@@ -1,4 +1,4 @@
-# NextJS 15 Checkpoint 3
+.# NextJS 15 Checkpoint 3
 
 Welcome to Checkpoint 3 of the NextJS 15 course! This project will help you solidify your understanding of Next.js, React, and good software engineering practices.
 
